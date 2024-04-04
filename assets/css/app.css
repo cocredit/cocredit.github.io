@@ -328,9 +328,7 @@ button:hover,
     page-break-after: avoid;
   }
 }
-ul,
-ol,
-li {
+.menu-list {
   margin: 0px;
   padding: 0px;
   list-style: none;
@@ -5637,6 +5635,10 @@ a.zubuz-connect-login img {
   .zubuz-default-content.cta h2 {
     margin-bottom: 30px;
   }
+}
+
+.zubuz-small-mb {
+  margin-bottom: 25px;
 }
 
 .zubuz-extara-mt {
