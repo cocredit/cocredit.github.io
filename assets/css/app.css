@@ -64,6 +64,7 @@
 html {
   box-sizing: border-box;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -3373,6 +3374,17 @@ h1.post__title {
   .zubuz-hero-btn-wrap {
     flex-direction: column;
     row-gap: 20px;
+  }
+}
+
+.zubuz-hero-section {
+  background-image: url('../images/v1/hero-shape1.png');
+}
+
+
+@media (max-width: 768px) {
+  .zubuz-hero-section {
+    background-size: 103%;
   }
 }
 
