@@ -3302,7 +3302,6 @@ h1.post__title {
 }
 .zubuz-hero-card.card1 {
   top: 5%;
-  left: 13%;
 }
 @media (max-width: 1299px) {
   .zubuz-hero-card.card1 {
@@ -5306,7 +5305,7 @@ a.zubuz-connect-login img {
 @media (max-width: 1300px) {
   .zubuz-thumb-card2 {
     width: 230px;
-    right: 0;
+    right: -28%;
   }
 }
 
@@ -5372,6 +5371,18 @@ a.zubuz-connect-login img {
   }
 }
 
+@media (min-width: 992px) {
+  .testimonial-image {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 991px) {
+  .testimonial-image {
+    display: flex;
+    justify-content: center;
+  }
+}
 .zubuz-v3-thumb {
   margin-right: 27px;
   position: relative;
