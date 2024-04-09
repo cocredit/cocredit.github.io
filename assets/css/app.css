@@ -1930,6 +1930,13 @@ header.zubuz-header-section.white-menu.sticky-menu {
   color: var(--primary-color);
 }
 
+@media (max-width: 400px) {
+  .btn-login {
+    visibility: hidden;
+    width: 0px;
+  }
+}
+
 @media (max-width: 767px) {
   .site-header .mobile-menu-trigger {
     margin-left: 25px;
