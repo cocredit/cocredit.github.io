@@ -3329,7 +3329,7 @@ h1.post__title {
   }
 }
 .zubuz-hero-card.card3 {
-  top: -18%;
+  top: -5%;
   right: -5%;
 }
 @media (max-width: 1299px) {
@@ -5287,7 +5287,7 @@ a.zubuz-connect-login img {
 
 .zubuz-thumb-card {
   position: absolute;
-  bottom: 60px;
+  top: 60px;
   right: 15px;
   animation: float-top-bottom 6s ease-in-out infinite;
 }
@@ -5299,7 +5299,7 @@ a.zubuz-connect-login img {
 
 .zubuz-thumb-card2 {
   position: absolute;
-  bottom: 60px;
+  top: 60px;
   right: -18%;
   animation: float-top-bottom 6s ease-in-out infinite;
 }
