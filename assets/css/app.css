@@ -3883,6 +3883,7 @@ span.zubuz-title-shape {
   transition: all 0.4s;
   background-color: var(--white-bg);
   border: 1px solid var(--light-color);
+  height: 288px;
 }
 .zubuz-iconbox-wrap.center {
   text-align: center;
