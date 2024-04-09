@@ -5310,6 +5310,7 @@ a.zubuz-connect-login img {
   position: absolute;
   top: 60px;
   right: 15px;
+  width: 196px;
   animation: float-top-bottom 6s ease-in-out infinite;
 }
 @media (max-width: 1199px) {
@@ -5322,6 +5323,7 @@ a.zubuz-connect-login img {
   position: absolute;
   top: 60px;
   right: -18%;
+  width: 196px;
   animation: float-top-bottom 6s ease-in-out infinite;
 }
 @media (max-width: 1300px) {
