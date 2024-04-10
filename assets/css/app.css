@@ -3390,9 +3390,8 @@ h1.post__title {
 }
 
 .zubuz-hero-section {
-  background-image: url('../images/v1/hero-shape1.png');
+  background-image: url("../images/v1/hero-shape1.png");
 }
-
 
 @media (max-width: 768px) {
   .zubuz-hero-section {
@@ -5398,7 +5397,7 @@ a.zubuz-connect-login img {
 @media (min-width: 992px) {
   .testimonial-image {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 }
 @media (max-width: 991px) {
