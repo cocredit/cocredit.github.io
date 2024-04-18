@@ -3868,7 +3868,7 @@ span.zubuz-title-shape {
 }
 .zubuz-iconbox-thumb img {
   width: 100%;
-  box-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.08); */
 }
 .zubuz-iconbox-btn {
   display: inline-flex;
