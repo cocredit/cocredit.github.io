@@ -94,6 +94,9 @@
           </div>
 
           <div class="header-btn header-btn-l1 ms-auto d-xs-inline-flex">
+            <div class="zubuz-header-btn-wrap btn-login">
+              <a class="zubuz-login-btn" href="sign-up.html">Login</a>
+            </div>
             <a
               class="zubuz-default-btn zubuz-header-btn"
               href="https://portal.cocredit.com.au/auth/signup"
@@ -161,16 +164,10 @@
                     placeholder="Write us your comment"
                   ></textarea>
                 </div>
-                <button id="zubuz-submit-btn" type="submit">
+                <button id="zubuz-submit-btn" type="button">
                   <span>Send Message</span>
                 </button>
               </form>
-              <script>
-                document.getElementById("contactForm").onsubmit = function () {
-                  window.location.href = "https://www.cocredit.com/thank-you";
-                  return false;
-                };
-              </script>
             </div>
           </div>
         </div>
