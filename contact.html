@@ -141,23 +141,31 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="zubuz-main-form">
-                      <input type="text" placeholder="Your Name*" />
+                      <input name="name" type="text" placeholder="Your Name*" />
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="zubuz-main-form">
-                      <input type="email" placeholder="Email Address*" />
+                      <input
+                        name="email"
+                        type="email"
+                        placeholder="Email Address*"
+                      />
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="zubuz-main-form">
-                      <input type="mobile" placeholder="Contact Number*" />
+                      <input
+                        name="phone"
+                        type="mobile"
+                        placeholder="Contact Number*"
+                      />
                     </div>
                   </div>
                 </div>
                 <div class="zubuz-main-form">
                   <textarea
-                    name="textarea"
+                    name="message"
                     placeholder="Write us your comment"
                   ></textarea>
                 </div>
@@ -165,12 +173,6 @@
                   <span>Send Message</span>
                 </button>
               </form>
-              <script>
-                document.getElementById("contactForm").onsubmit = function () {
-                  window.location.href = "https://www.cocredit.com/thank-you";
-                  return false;
-                };
-              </script>
             </div>
           </div>
         </div>
