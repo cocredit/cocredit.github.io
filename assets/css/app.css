@@ -2485,18 +2485,11 @@ img.single-thumb {
 
 ul.single-list li {
   margin-bottom: 24px;
-  padding-left: 18px;
+  padding-left: 0;
   position: relative;
 }
 ul.single-list li:before {
-  content: " ";
-  left: 0;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 10px;
-  position: absolute;
-  background-color: var(--body-color);
+  display: none;
 }
 
 .post-tag {
