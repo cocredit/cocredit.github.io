@@ -175,9 +175,14 @@
               <h3>Fill the from below</h3>
               <form action="https://formspree.io/f/mqkrwwrb" method="POST">
                 <div class="row">
-                  <div class="col-lg-12">
+                  <div class="col-lg-6">
                     <div class="zubuz-main-form">
-                      <input name="name" type="text" placeholder="Your Name*" />
+                      <input name="first_name" type="text" placeholder="First Name*" required />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="zubuz-main-form">
+                      <input name="last_name" type="text" placeholder="Last Name*" required />
                     </div>
                   </div>
                   <div class="col-lg-12">
@@ -196,6 +201,57 @@
                         type="mobile"
                         placeholder="Contact Number*"
                       />
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="zubuz-main-form" style="display: flex; align-items: center; gap: 15px;">
+                      <style>
+                        #broker-checkbox {
+                          position: absolute;
+                          opacity: 0;
+                          cursor: pointer;
+                        }
+                        .custom-checkbox {
+                          width: 32px;
+                          height: 32px;
+                          border: 2px solid #ddd;
+                          border-radius: 8px;
+                          display: inline-flex;
+                          align-items: center;
+                          justify-content: center;
+                          cursor: pointer;
+                          transition: all 0.3s ease;
+                          flex-shrink: 0;
+                        }
+                        #broker-checkbox:checked ~ .custom-checkbox {
+                          background-color: #ff6b35;
+                          border-color: #ff6b35;
+                        }
+                        #broker-checkbox:checked ~ .custom-checkbox::after {
+                          content: '✔';
+                          color: white;
+                          font-size: 18px;
+                          font-weight: normal;
+                        }
+                        .checkbox-wrapper {
+                          position: relative;
+                          display: flex;
+                          align-items: center;
+                          gap: 15px;
+                        }
+                      </style>
+                      <div class="checkbox-wrapper">
+                        <input
+                          name="broker_confirmation"
+                          type="checkbox"
+                          id="broker-checkbox"
+                          required
+                        />
+                        <label class="custom-checkbox" for="broker-checkbox"></label>
+                        <label for="broker-checkbox" style="margin: 0; cursor: pointer; font-size: 16px;">
+                          Check this box if you are a mortgage broker
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -307,5 +363,50 @@
     <script src="assets/js/faq.js"></script>
 
     <script src="assets/js/app.js"></script>
+
+    <script>
+    (function() {
+        // --- Helper: read cookie by name ---
+        function getCookie(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : "";
+        }
+        // --- Collect values ---
+        var fbp   = getCookie('_fbp');
+        var fbc   = getCookie('_fbc');
+        var fbclid = getCookie('_fbclid');
+        var gclid = getCookie('gclid');
+        var clientUA = navigator.userAgent;
+        // --- Insert into hidden fields ---
+        function setHiddenField(form, name, value) {
+            if (!value) return; // skip empty values
+            var field = form.querySelector("input[name='" + name + "']");
+            if (!field) {
+                field = document.createElement("input");
+                field.type = "hidden";
+                field.name = name;
+                form.appendChild(field);
+            }
+            field.value = value;
+        }
+        // --- Run once the DOM is ready ---
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.querySelector("form"); // adjust selector if needed
+            if (!form) return; // no form found
+            // Add hidden fields - Can update as need be
+            setHiddenField(form, "fbp", fbp);
+            setHiddenField(form, "fbc", fbc);
+            setHiddenField(form, "fbclid", fbclid);
+            setHiddenField(form, "gclid", gclid);
+            setHiddenField(form, "client_user_agent", clientUA);
+            // Fetch IP asynchronously - Please check this one
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    setHiddenField(form, "ip_address", data.ip);
+                });
+        });
+    })();
+    </script>
   </body>
 </html>
