@@ -177,12 +177,22 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="zubuz-main-form">
-                      <input name="first_name" type="text" placeholder="First Name*" required />
+                      <input
+                        name="first_name"
+                        type="text"
+                        placeholder="First Name*"
+                        required
+                      />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="zubuz-main-form">
-                      <input name="last_name" type="text" placeholder="Last Name*" required />
+                      <input
+                        name="last_name"
+                        type="text"
+                        placeholder="Last Name*"
+                        required
+                      />
                     </div>
                   </div>
                   <div class="col-lg-12">
@@ -204,7 +214,10 @@
                     </div>
                   </div>
                   <div class="col-lg-12">
-                    <div class="zubuz-main-form" style="display: flex; align-items: center; gap: 15px;">
+                    <div
+                      class="zubuz-main-form"
+                      style="display: flex; align-items: center; gap: 15px"
+                    >
                       <style>
                         #broker-checkbox {
                           position: absolute;
@@ -228,7 +241,7 @@
                           border-color: #ff6b35;
                         }
                         #broker-checkbox:checked ~ .custom-checkbox::after {
-                          content: '✔';
+                          content: "✔";
                           color: white;
                           font-size: 18px;
                           font-weight: normal;
@@ -246,8 +259,14 @@
                           type="checkbox"
                           id="broker-checkbox"
                         />
-                        <label class="custom-checkbox" for="broker-checkbox"></label>
-                        <label for="broker-checkbox" style="margin: 0; cursor: pointer; font-size: 16px;">
+                        <label
+                          class="custom-checkbox"
+                          for="broker-checkbox"
+                        ></label>
+                        <label
+                          for="broker-checkbox"
+                          style="margin: 0; cursor: pointer; font-size: 16px"
+                        >
                           Check this box if you are a mortgage broker
                         </label>
                       </div>
@@ -364,88 +383,94 @@
     <script src="assets/js/app.js"></script>
 
     <script>
-    (function() {
+      (function () {
         // --- Helper: read cookie by name ---
         function getCookie(name) {
-            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-            return match ? decodeURIComponent(match[2]) : "";
+          var match = document.cookie.match(
+            new RegExp("(^| )" + name + "=([^;]+)")
+          );
+          return match ? decodeURIComponent(match[2]) : "";
         }
         // --- Collect values ---
-        var fbp   = getCookie('_fbp');
-        var fbc   = getCookie('_fbc');
-        var fbclid = getCookie('_fbclid');
-        var gclid = getCookie('gclid');
+        var fbp = getCookie("_fbp");
+        var fbc = getCookie("_fbc");
+        var fbclid = getCookie("_fbclid");
+        var gclid = getCookie("gclid");
         var clientUA = navigator.userAgent;
         // --- Insert into hidden fields ---
         function setHiddenField(form, name, value) {
-            if (!value) return; // skip empty values
-            var field = form.querySelector("input[name='" + name + "']");
-            if (!field) {
-                field = document.createElement("input");
-                field.type = "hidden";
-                field.name = name;
-                form.appendChild(field);
-            }
-            field.value = value;
+          if (!value) return; // skip empty values
+          var field = form.querySelector("input[name='" + name + "']");
+          if (!field) {
+            field = document.createElement("input");
+            field.type = "hidden";
+            field.name = name;
+            form.appendChild(field);
+          }
+          field.value = value;
         }
         // --- Run once the DOM is ready ---
-        document.addEventListener("DOMContentLoaded", function() {
-            var form = document.getElementById("contact-form");
-            if (!form) return; // no form found
-            
-            // Add hidden fields - Can update as need be
-            setHiddenField(form, "fbp", fbp);
-            setHiddenField(form, "fbc", fbc);
-            setHiddenField(form, "fbclid", fbclid);
-            setHiddenField(form, "gclid", gclid);
-            setHiddenField(form, "client_user_agent", clientUA);
-            
-            // Fetch IP asynchronously
-            fetch("https://api.ipify.org?format=json")
-                .then(response => response.json())
-                .then(data => {
-                    setHiddenField(form, "ip_address", data.ip);
-                });
-            
-            // Handle form submission with custom redirect
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                var checkbox = document.getElementById('broker-checkbox');
-                
-                // If checkbox is NOT checked, just redirect without submitting
-                if (!checkbox || !checkbox.checked) {
-                    window.location.href = "/thank-you-general.html";
-                    return false;
-                }
-                
-                // Only submit form data if checkbox IS checked (broker)
-                var formData = new FormData(form);
-                
-                fetch("https://formspree.io/f/mqkrwwrb", {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        // Redirect to broker thank you page
-                        window.location.href = "/thank-you.html";
-                    } else {
-                        alert('There was an error submitting the form. Please try again.');
-                    }
-                })
-                .catch(function(error) {
-                    alert('There was an error submitting the form. Please try again.');
-                });
-                
-                return false;
+        document.addEventListener("DOMContentLoaded", function () {
+          var form = document.getElementById("contact-form");
+          if (!form) return; // no form found
+
+          // Add hidden fields - Can update as need be
+          setHiddenField(form, "fbp", fbp);
+          setHiddenField(form, "fbc", fbc);
+          setHiddenField(form, "fbclid", fbclid);
+          setHiddenField(form, "gclid", gclid);
+          setHiddenField(form, "client_user_agent", clientUA);
+
+          // Fetch IP asynchronously
+          fetch("https://api.ipify.org?format=json")
+            .then((response) => response.json())
+            .then((data) => {
+              setHiddenField(form, "ip_address", data.ip);
             });
+
+          // Handle form submission with custom redirect
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var checkbox = document.getElementById("broker-checkbox");
+
+            // If checkbox is NOT checked, just redirect without submitting
+            if (!checkbox || !checkbox.checked) {
+              window.location.href = "/thanks.html";
+              return false;
+            }
+
+            // Only submit form data if checkbox IS checked (broker)
+            var formData = new FormData(form);
+
+            fetch("https://formspree.io/f/mqkrwwrb", {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            })
+              .then(function (response) {
+                if (response.ok) {
+                  // Redirect to broker thank you page
+                  window.location.href = "/thank-you.html";
+                } else {
+                  alert(
+                    "There was an error submitting the form. Please try again."
+                  );
+                }
+              })
+              .catch(function (error) {
+                alert(
+                  "There was an error submitting the form. Please try again."
+                );
+              });
+
+            return false;
+          });
         });
-    })();
+      })();
     </script>
   </body>
 </html>
