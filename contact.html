@@ -396,6 +396,8 @@
         var fbc = getCookie("_fbc");
         var fbclid = getCookie("_fbclid");
         var gclid = getCookie("gclid");
+        var ga = getCookie("_ga");
+        var gcl_au = getCookie("_gcl_au");
         var clientUA = navigator.userAgent;
         // --- Insert into hidden fields ---
         function setHiddenField(form, name, value) {
@@ -419,6 +421,8 @@
           setHiddenField(form, "fbc", fbc);
           setHiddenField(form, "fbclid", fbclid);
           setHiddenField(form, "gclid", gclid);
+          setHiddenField(form, "_ga", ga);
+          setHiddenField(form, "_gcl_au", gcl_au);
           setHiddenField(form, "client_user_agent", clientUA);
 
           // Fetch IP asynchronously
