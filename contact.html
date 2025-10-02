@@ -202,6 +202,7 @@
                         type="email"
                         placeholder="Email Address*"
                       />
+                      <span class="error-message" id="email-error" style="color: #ff6b35; font-size: 14px; margin-top: 5px; display: none;"></span>
                     </div>
                   </div>
                   <div class="col-lg-12">
@@ -211,6 +212,7 @@
                         type="mobile"
                         placeholder="Contact Number*"
                       />
+                      <span class="error-message" id="phone-error" style="color: #ff6b35; font-size: 14px; margin-top: 5px; display: none;"></span>
                     </div>
                   </div>
                   <div class="col-lg-12">
@@ -436,6 +438,39 @@
           form.addEventListener("submit", function (e) {
             e.preventDefault();
             e.stopPropagation();
+
+            // Clear previous errors
+            var emailError = document.getElementById("email-error");
+            var phoneError = document.getElementById("phone-error");
+            emailError.style.display = "none";
+            phoneError.style.display = "none";
+
+            var hasErrors = false;
+
+            // Email validation
+            var emailInput = form.querySelector("input[name='email']");
+            if (emailInput && emailInput.value && !emailInput.value.includes("@")) {
+              emailError.textContent = "Please enter a valid email address with @";
+              emailError.style.display = "block";
+              hasErrors = true;
+            }
+
+            // Phone validation for Australian mobile format
+            var phoneInput = form.querySelector("input[name='phone']");
+            if (phoneInput && phoneInput.value) {
+              var phoneValue = phoneInput.value.trim();
+              // Matches +61 followed by 9 digits or 0 followed by 9 digits (Australian mobile)
+              var australianMobileRegex = /^(\+61|0)[0-9]{9}$/;
+              if (!australianMobileRegex.test(phoneValue.replace(/\s/g, ""))) {
+                phoneError.textContent = "Please enter a valid Australian mobile number (e.g., +61412345678 or 0412345678)";
+                phoneError.style.display = "block";
+                hasErrors = true;
+              }
+            }
+
+            if (hasErrors) {
+              return false;
+            }
 
             var checkbox = document.getElementById("broker-checkbox");
 
