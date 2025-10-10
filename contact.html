@@ -215,65 +215,6 @@
                       <span class="error-message" id="phone-error" style="color: #ff6b35; font-size: 14px; margin-top: 5px; display: none;"></span>
                     </div>
                   </div>
-                  <div class="col-lg-12">
-                    <div
-                      class="zubuz-main-form"
-                      style="display: flex; align-items: center; gap: 15px"
-                    >
-                      <style>
-                        #broker-checkbox {
-                          position: absolute;
-                          opacity: 0;
-                          cursor: pointer;
-                        }
-                        .custom-checkbox {
-                          width: 32px;
-                          height: 32px;
-                          border: 2px solid #ddd;
-                          border-radius: 8px;
-                          display: inline-flex;
-                          align-items: center;
-                          justify-content: center;
-                          cursor: pointer;
-                          transition: all 0.3s ease;
-                          flex-shrink: 0;
-                        }
-                        #broker-checkbox:checked ~ .custom-checkbox {
-                          background-color: #ff6b35;
-                          border-color: #ff6b35;
-                        }
-                        #broker-checkbox:checked ~ .custom-checkbox::after {
-                          content: "✔";
-                          color: white;
-                          font-size: 18px;
-                          font-weight: normal;
-                        }
-                        .checkbox-wrapper {
-                          position: relative;
-                          display: flex;
-                          align-items: center;
-                          gap: 15px;
-                        }
-                      </style>
-                      <div class="checkbox-wrapper">
-                        <input
-                          name="broker_confirmation"
-                          type="checkbox"
-                          id="broker-checkbox"
-                        />
-                        <label
-                          class="custom-checkbox"
-                          for="broker-checkbox"
-                        ></label>
-                        <label
-                          for="broker-checkbox"
-                          style="margin: 0; cursor: pointer; font-size: 16px"
-                        >
-                          Check this box if you are a mortgage broker
-                        </label>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <button id="zubuz-submit-btn" type="submit">
                   <span>Send Message</span>
@@ -472,15 +413,7 @@
               return false;
             }
 
-            var checkbox = document.getElementById("broker-checkbox");
-
-            // If checkbox is NOT checked, just redirect without submitting
-            if (!checkbox || !checkbox.checked) {
-              window.location.href = "/thanks.html";
-              return false;
-            }
-
-            // Only submit form data if checkbox IS checked (broker)
+            // Submit form data
             var formData = new FormData(form);
 
             fetch("https://formspree.io/f/mqkrwwrb", {
@@ -492,8 +425,8 @@
             })
               .then(function (response) {
                 if (response.ok) {
-                  // Redirect to broker thank you page
-                  window.location.href = "/thank-you.html";
+                  // Redirect to thank you page
+                  window.location.href = "/thanks.html";
                 } else {
                   alert(
                     "There was an error submitting the form. Please try again."
