@@ -85,6 +85,36 @@
 
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://www.cocredit.com.au/contact.html"
+    />
+    <meta property="og:title" content="Co.Credit - Contact Us" />
+    <meta
+      property="og:description"
+      content="Unique, bespoke loans for trail book purchases analyzed on cash flow."
+    />
+    <meta
+      property="og:image"
+      content="https://www.cocredit.com.au/assets/images/logo/logo.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+
+    <!-- Twitter Card tags (optional but recommended) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Co.Credit - Contact Us" />
+    <meta
+      name="twitter:description"
+      content="Unique, bespoke loans for trail book purchases analyzed on cash flow."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.cocredit.com.au/assets/images/logo/logo.png"
+    />
   </head>
 
   <body class="light">
@@ -202,7 +232,16 @@
                         type="email"
                         placeholder="Email Address*"
                       />
-                      <span class="error-message" id="email-error" style="color: #ff6b35; font-size: 14px; margin-top: 5px; display: none;"></span>
+                      <span
+                        class="error-message"
+                        id="email-error"
+                        style="
+                          color: #ff6b35;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        "
+                      ></span>
                     </div>
                   </div>
                   <div class="col-lg-12">
@@ -212,7 +251,16 @@
                         type="mobile"
                         placeholder="Contact Number*"
                       />
-                      <span class="error-message" id="phone-error" style="color: #ff6b35; font-size: 14px; margin-top: 5px; display: none;"></span>
+                      <span
+                        class="error-message"
+                        id="phone-error"
+                        style="
+                          color: #ff6b35;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        "
+                      ></span>
                     </div>
                   </div>
                 </div>
@@ -390,8 +438,13 @@
 
             // Email validation
             var emailInput = form.querySelector("input[name='email']");
-            if (emailInput && emailInput.value && !emailInput.value.includes("@")) {
-              emailError.textContent = "Please enter a valid email address with @";
+            if (
+              emailInput &&
+              emailInput.value &&
+              !emailInput.value.includes("@")
+            ) {
+              emailError.textContent =
+                "Please enter a valid email address with @";
               emailError.style.display = "block";
               hasErrors = true;
             }
@@ -403,7 +456,8 @@
               // Matches +61 followed by 9 digits or 0 followed by 9 digits (Australian mobile)
               var australianMobileRegex = /^(\+61|0)[0-9]{9}$/;
               if (!australianMobileRegex.test(phoneValue.replace(/\s/g, ""))) {
-                phoneError.textContent = "Please enter a valid Australian mobile number (e.g., +61412345678 or 0412345678)";
+                phoneError.textContent =
+                  "Please enter a valid Australian mobile number (e.g., +61412345678 or 0412345678)";
                 phoneError.style.display = "block";
                 hasErrors = true;
               }
