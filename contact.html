@@ -320,10 +320,7 @@
                           class="broker-checkbox"
                           value="yes"
                         />
-                        <label
-                          class="custom-checkbox"
-                          for="broker-yes"
-                        ></label>
+                        <label class="custom-checkbox" for="broker-yes"></label>
                         <label for="broker-yes">
                           Yes — I am a mortgage broker
                         </label>
@@ -336,18 +333,14 @@
                           class="broker-checkbox"
                           value="no"
                         />
-                        <label
-                          class="custom-checkbox"
-                          for="broker-no"
-                        ></label>
+                        <label class="custom-checkbox" for="broker-no"></label>
                         <label for="broker-no">
                           No — I am not a mortgage broker
                         </label>
                       </div>
-                      <span
-                        class="broker-selection-error"
-                        id="broker-error"
-                      >Please select one option</span>
+                      <span class="broker-selection-error" id="broker-error"
+                        >Please select one option</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -440,7 +433,8 @@
           <div class="zubuz-copywright light">
             <p>
               Approved applicants only. Conditions, fees and charges may apply.
-              Copyright &copy; 2024 | Co.Credit pty. ltd. | ABN 50 666 650 273
+              Copyright &copy; 2025 | Co.Credit Finance pty. ltd. | ABN 72 676
+              367 196
             </p>
           </div>
         </div>
@@ -546,7 +540,12 @@
             // Broker selection validation
             var brokerYes = document.getElementById("broker-yes");
             var brokerNo = document.getElementById("broker-no");
-            if (brokerYes && brokerNo && !brokerYes.checked && !brokerNo.checked) {
+            if (
+              brokerYes &&
+              brokerNo &&
+              !brokerYes.checked &&
+              !brokerNo.checked
+            ) {
               brokerError.style.display = "block";
               hasErrors = true;
             }
