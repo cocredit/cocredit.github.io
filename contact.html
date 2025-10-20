@@ -263,86 +263,6 @@
                       ></span>
                     </div>
                   </div>
-                  <div class="col-lg-12">
-                    <div class="zubuz-main-form">
-                      <style>
-                        .broker-checkbox {
-                          position: absolute;
-                          opacity: 0;
-                          cursor: pointer;
-                        }
-                        .custom-checkbox {
-                          width: 24px;
-                          height: 24px;
-                          border: 2px solid #ddd;
-                          border-radius: 6px;
-                          display: inline-flex;
-                          align-items: center;
-                          justify-content: center;
-                          cursor: pointer;
-                          transition: all 0.3s ease;
-                          flex-shrink: 0;
-                        }
-                        .broker-checkbox:checked ~ .custom-checkbox {
-                          background-color: #ff6b35;
-                          border-color: #ff6b35;
-                        }
-                        .broker-checkbox:checked ~ .custom-checkbox::after {
-                          content: "✔";
-                          color: white;
-                          font-size: 14px;
-                          font-weight: normal;
-                        }
-                        .checkbox-wrapper {
-                          position: relative;
-                          display: flex;
-                          align-items: center;
-                          gap: 12px;
-                          margin-bottom: 15px;
-                        }
-                        .checkbox-wrapper label {
-                          margin: 0;
-                          cursor: pointer;
-                          font-size: 16px;
-                        }
-                        .broker-selection-error {
-                          color: #ff6b35;
-                          font-size: 14px;
-                          margin-top: 5px;
-                          display: none;
-                        }
-                      </style>
-                      <div class="checkbox-wrapper">
-                        <input
-                          name="broker_confirmation"
-                          type="checkbox"
-                          id="broker-yes"
-                          class="broker-checkbox"
-                          value="yes"
-                        />
-                        <label class="custom-checkbox" for="broker-yes"></label>
-                        <label for="broker-yes">
-                          Yes — I am a mortgage broker
-                        </label>
-                      </div>
-                      <div class="checkbox-wrapper">
-                        <input
-                          name="broker_confirmation"
-                          type="checkbox"
-                          id="broker-no"
-                          class="broker-checkbox"
-                          value="no"
-                        />
-                        <label class="custom-checkbox" for="broker-no"></label>
-                        <label for="broker-no">
-                          No — I am not a mortgage broker
-                        </label>
-                      </div>
-                      <span class="broker-selection-error" id="broker-error"
-                        >Please select one option</span
-                      >
-                    </div>
-                  </div>
                 </div>
                 <button id="zubuz-submit-btn" type="submit">
                   <span>Send Message</span>
@@ -497,23 +417,6 @@
           setHiddenField(form, "_gcl_au", gcl_au);
           setHiddenField(form, "client_user_agent", clientUA);
 
-          // Handle broker checkbox behavior (only one can be selected)
-          var brokerYes = document.getElementById("broker-yes");
-          var brokerNo = document.getElementById("broker-no");
-
-          if (brokerYes && brokerNo) {
-            brokerYes.addEventListener("change", function () {
-              if (this.checked) {
-                brokerNo.checked = false;
-              }
-            });
-
-            brokerNo.addEventListener("change", function () {
-              if (this.checked) {
-                brokerYes.checked = false;
-              }
-            });
-          }
 
           // Fetch IP asynchronously
           fetch("https://api.ipify.org?format=json")
@@ -530,25 +433,10 @@
             // Clear previous errors
             var emailError = document.getElementById("email-error");
             var phoneError = document.getElementById("phone-error");
-            var brokerError = document.getElementById("broker-error");
             emailError.style.display = "none";
             phoneError.style.display = "none";
-            brokerError.style.display = "none";
 
             var hasErrors = false;
-
-            // Broker selection validation
-            var brokerYes = document.getElementById("broker-yes");
-            var brokerNo = document.getElementById("broker-no");
-            if (
-              brokerYes &&
-              brokerNo &&
-              !brokerYes.checked &&
-              !brokerNo.checked
-            ) {
-              brokerError.style.display = "block";
-              hasErrors = true;
-            }
 
             // Email validation
             var emailInput = form.querySelector("input[name='email']");
@@ -581,17 +469,7 @@
               return false;
             }
 
-            // Check broker selection and redirect accordingly
-            var brokerYes = document.getElementById("broker-yes");
-            var brokerNo = document.getElementById("broker-no");
-
-            if (brokerNo && brokerNo.checked) {
-              // If "No" is selected, redirect without submitting
-              window.location.href = "/thank-you-general.html";
-              return false;
-            }
-
-            // Submit form data (only if "Yes" was selected)
+            // Submit form data
             var formData = new FormData(form);
 
             fetch("https://formspree.io/f/mqkrwwrb", {
