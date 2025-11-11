@@ -2619,6 +2619,15 @@ a.comment-reply {
   height: auto;
 }
 
+.lead-magnet-subtitle {
+  font-size: 32px;
+  line-height: 1.35;
+  color: rgba(20, 22, 33, 0.85);
+  font-weight: 500;
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+
 .comment-box-form {
   padding: 40px;
   border-radius: 10px;
