@@ -146,11 +146,13 @@
         <nav class="navbar site-navbar">
           <!-- Brand Logo-->
           <div class="brand-logo">
-            <img
-              src="assets/images/logo/logo-white.png"
-              alt=""
-              class="light-version-logo"
-            />
+            <a href="start.html">
+              <img
+                src="assets/images/logo/logo-white.png"
+                alt=""
+                class="light-version-logo"
+              />
+            </a>
           </div>
           <div class="menu-block-wrapper">
             <div class="menu-overlay"></div>
@@ -405,7 +407,6 @@
           setHiddenField(form, "_ga", ga);
           setHiddenField(form, "_gcl_au", gcl_au);
           setHiddenField(form, "client_user_agent", clientUA);
-
 
           // Fetch IP asynchronously
           fetch("https://api.ipify.org?format=json")
