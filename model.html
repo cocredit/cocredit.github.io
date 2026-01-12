@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Meta Pixel Code -->
   <script>
     !(function (f, b, e, v, n, t, s) {
@@ -51,8 +50,9 @@
   </script>
   <!-- END GOOGLE TAGS -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Co.Credit - Thank you</title>
-  <meta name="description" content="Unique, bespoke loans for trail book purchases analyzed on cash flow." />
+  <title>Co.Credit - Buying a Trail Book</title>
+  <meta name="description"
+    content="Enter your details to download our guide on what to do and what not to do when buying a trail book." />
 
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
@@ -72,6 +72,23 @@
 
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/app.css" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.cocredit.com.au/model.html" />
+  <meta property="og:title" content="Co.Credit - Buying a Trail Book" />
+  <meta property="og:description"
+    content="Enter your details to download our guide on what to do and what not to do when buying a trail book." />
+  <meta property="og:image" content="https://www.cocredit.com.au/assets/images/logo/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="600" />
+
+  <!-- Twitter Card tags (optional but recommended) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Co.Credit - Buying a Trail Book" />
+  <meta name="twitter:description"
+    content="Enter your details to download our guide on what to do and what not to do when buying a trail book." />
+  <meta name="twitter:image" content="https://www.cocredit.com.au/assets/images/logo/logo.png" />
 </head>
 
 <body class="light">
@@ -104,9 +121,6 @@
         </div>
 
         <div class="header-btn header-btn-l1 ms-auto d-xs-inline-flex">
-          <div class="zubuz-header-btn-wrap btn-login">
-            <a class="zubuz-login-btn" href="sign-up.html">Login</a>
-          </div>
           <a class="zubuz-default-btn zubuz-header-btn" href="https://portal.cocredit.com.au/auth/signup">
             <span>Get Started</span>
           </a>
@@ -118,7 +132,9 @@
 
   <div class="zubuz-breadcrumb">
     <div class="container">
-      <h1 class="post__title">Thank you</h1>
+      <h1 class="post__title">
+        Using trail book loans to double your revenue
+      </h1>
     </div>
   </div>
   <!-- End breadcrumb -->
@@ -126,18 +142,67 @@
   <div class="section zubuz-section-padding2">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="zubuz-default-content m-right">
-            <h2>We've received your request and will be in touch shortly.</h2>
-            <p>Keep an eye on your inbox.</p>
+            <h2 class="lead-magnet-subtitle">
+              Enter your details to download our model for free.
+            </h2>
             <div class="zubuz-extara-mt">
               <div class="zubuz-iconbox-wrap-left d-block">
                 <div class="zubuz-iconbox-data data-small">
-                  <span>Office Location:</span>
-                  <p>55 Collins St, Melbourne.</p>
+                  <span>What you'll learn:</span>
+                  <p>
+                    What to look for when purchasing a trail book. How to set
+                    yourself up for success and how to avoid traps along the
+                    way.
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="zubuz-form-wrap">
+            <h3>Fill the form below</h3>
+            <form action="#" method="POST" id="lead-magnet-form">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="zubuz-main-form">
+                    <input name="first_name" type="text" placeholder="First Name*" required />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="zubuz-main-form">
+                    <input name="last_name" type="text" placeholder="Last Name*" required />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="zubuz-main-form">
+                    <input name="email" type="email" placeholder="Email Address*" />
+                    <span class="error-message" id="lead-email-error" style="
+                          color: #ff6b35;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        "></span>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="zubuz-main-form">
+                    <input name="phone" type="mobile" placeholder="Contact Number*" />
+                    <span class="error-message" id="lead-phone-error" style="
+                          color: #ff6b35;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        "></span>
+                  </div>
+                </div>
+              </div>
+              <button id="zubuz-submit-btn" type="submit">
+                <span>Download the guide</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -149,7 +214,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6">
-          <a href="mailto:name@email.com">
+          <a href="mailto:hello@cocredit.com.au">
             <div class="zubuz-iconbox-wrap-left text-center-lg rt-mb-24">
               <div class="zubuz-iconbox-icon">
                 <img src="assets/images/icon/email3.svg" alt="" />
@@ -243,6 +308,124 @@
   <script src="assets/js/faq.js"></script>
 
   <script src="assets/js/app.js"></script>
+
+  <script>
+    (function () {
+      function getCookie(name) {
+        var match = document.cookie.match(
+          new RegExp("(^| )" + name + "=([^;]+)")
+        );
+        return match ? decodeURIComponent(match[2]) : "";
+      }
+
+      var fbp = getCookie("_fbp");
+      var fbc = getCookie("_fbc");
+      var fbclid = getCookie("_fbclid");
+      var gclid = getCookie("gclid");
+      var ga = getCookie("_ga");
+      var gcl_au = getCookie("_gcl_au");
+      var clientUA = navigator.userAgent;
+
+      function setHiddenField(form, name, value) {
+        if (!value) return;
+        var field = form.querySelector("input[name='" + name + "']");
+        if (!field) {
+          field = document.createElement("input");
+          field.type = "hidden";
+          field.name = name;
+          form.appendChild(field);
+        }
+        field.value = value;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById("lead-magnet-form");
+        if (!form) return;
+
+        setHiddenField(form, "fbp", fbp);
+        setHiddenField(form, "fbc", fbc);
+        setHiddenField(form, "fbclid", fbclid);
+        setHiddenField(form, "gclid", gclid);
+        setHiddenField(form, "_ga", ga);
+        setHiddenField(form, "_gcl_au", gcl_au);
+        setHiddenField(form, "client_user_agent", clientUA);
+
+        fetch("https://api.ipify.org?format=json")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            setHiddenField(form, "ip_address", data.ip);
+          });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var emailError = document.getElementById("lead-email-error");
+          var phoneError = document.getElementById("lead-phone-error");
+          emailError.style.display = "none";
+          phoneError.style.display = "none";
+
+          var hasErrors = false;
+
+          var emailInput = form.querySelector("input[name='email']");
+          if (
+            emailInput &&
+            emailInput.value &&
+            !emailInput.value.includes("@")
+          ) {
+            emailError.textContent =
+              "Please enter a valid email address with @";
+            emailError.style.display = "block";
+            hasErrors = true;
+          }
+
+          var phoneInput = form.querySelector("input[name='phone']");
+          if (phoneInput && phoneInput.value) {
+            var phoneValue = phoneInput.value.trim();
+            var australianMobileRegex = /^(\+61|0)[0-9]{9}$/;
+            if (!australianMobileRegex.test(phoneValue.replace(/\s/g, ""))) {
+              phoneError.textContent =
+                "Please enter a valid Australian mobile number (e.g., +61412345678 or 0412345678)";
+              phoneError.style.display = "block";
+              hasErrors = true;
+            }
+          }
+
+          if (hasErrors) {
+            return false;
+          }
+
+          var formData = new FormData(form);
+
+          fetch("https://formspree.io/f/xzzypwzj", {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then(function (response) {
+              if (response.ok) {
+                window.location.href = "packs/model.html";
+              } else {
+                alert(
+                  "There was an error submitting the form. Please try again."
+                );
+              }
+            })
+            .catch(function () {
+              alert(
+                "There was an error submitting the form. Please try again."
+              );
+            });
+
+          return false;
+        });
+      });
+    })();
+  </script>
 </body>
 
 </html>
