@@ -2619,6 +2619,24 @@ a.comment-reply {
   height: auto;
 }
 
+.model-magnet-highlight {
+  background-color: #1983c5;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.model-magnet-highlight .model-magnet-link {
+  display: block;
+  width: 100%;
+  max-width: 576px;
+  margin: 0 auto;
+}
+.model-magnet-highlight .model-magnet-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .lead-magnet-subtitle {
   font-size: 32px;
   line-height: 1.35;
