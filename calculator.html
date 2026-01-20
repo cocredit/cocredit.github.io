@@ -97,6 +97,7 @@
 
     .calculator-results.show {
       display: block;
+      margin-top: 0;
     }
 
     .result-label {
@@ -255,6 +256,12 @@
       grid-template-columns: 1fr 1fr;
       gap: 15px;
       margin-top: 20px;
+    }
+
+    @media (max-width: 991px) {
+      .zubuz-form-wrap {
+        margin-bottom: 30px;
+      }
     }
 
     @media (max-width: 576px) {
