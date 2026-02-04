@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Meta Pixel Code -->
+  <script>
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(
+      window,
+      document,
+      "script",
+      "https://connect.facebook.net/en_US/fbevents.js"
+    );
+    fbq("init", "1500631950881174");
+    fbq("track", "PageView");
+  </script>
+  <noscript><img height="1" width="1" style="display: none"
+      src="https://www.facebook.com/tr?id=1500631950881174&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- START GOOGLE TAGS -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-NWB3H5MQ");
+  </script>
+  <!-- END GOOGLE TAGS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Co.Credit - Borrowing Power Calculator</title>
+  <meta name="description"
+    content="Find out how much you can borrow against your trail book. Enter your monthly trail income and see your borrowing capacity for working capital or acquisitions." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Raleway:wght@600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/magnific-popup.css" />
+  <link rel="stylesheet" href="assets/css/slick.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/fontawesome.css" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/app.css" />
+
+  <!-- Chart.js for visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.cocredit.com.au/calculator.html" />
+  <meta property="og:title" content="Co.Credit - Borrowing Power Calculator" />
+  <meta property="og:description"
+    content="Find out how much you can borrow against your trail book. Enter your monthly trail income and see your borrowing capacity." />
+  <meta property="og:image" content="https://www.cocredit.com.au/assets/images/logo/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="600" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Co.Credit - Borrowing Power Calculator" />
+  <meta name="twitter:description"
+    content="Find out how much you can borrow against your trail book. Enter your monthly trail income and see your borrowing capacity." />
+  <meta name="twitter:image" content="https://www.cocredit.com.au/assets/images/logo/logo.png" />
+
+  <style>
+    .calculator-results {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .calculator-results.show {
+      display: block;
+      margin-top: 0;
+    }
+
+    .result-label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .result-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .result-value.highlight {
+      color: #f26739;
+    }
+
+    .result-value.green {
+      color: #2e7d32;
+    }
+
+    .chart-container {
+      position: relative;
+      margin-top: 20px;
+      height: 280px;
+    }
+
+    .input-prefix {
+      position: relative;
+    }
+
+    .input-prefix input {
+      padding-left: 25px;
+    }
+
+    .input-prefix::before {
+      content: "$";
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 16px;
+      z-index: 1;
+    }
+
+    .calculator-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 15px;
+    }
+
+    .result-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .result-card.primary {
+      background: linear-gradient(135deg, #f26739 0%, #ff8a65 100%);
+      border: none;
+      color: #fff;
+    }
+
+    .result-card.primary .result-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .result-card.primary .result-value {
+      color: #fff;
+    }
+
+    .result-card.working-capital {
+      border-left: 4px solid #1976d2;
+    }
+
+    .result-card.acquisition {
+      border-left: 4px solid #2e7d32;
+    }
+
+    .slider-container {
+      margin: 20px 0;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .slider-label span:first-child {
+      font-weight: 600;
+    }
+
+    .slider-value {
+      color: #f26739;
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e0e0e0;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f26739;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f26739;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 15px;
+    }
+
+    .breakdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .breakdown-item .label {
+      color: #666;
+    }
+
+    .breakdown-item .value {
+      font-weight: 600;
+    }
+
+    .access-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 991px) {
+      .zubuz-form-wrap {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .access-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cta-section {
+      margin-top: 30px;
+      text-align: center;
+      padding: 25px;
+      background: var(--light-bg);
+      border-radius: 10px;
+    }
+
+    .cta-section p {
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .purpose-selector {
+      margin: 20px 0;
+    }
+
+    .purpose-label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .purpose-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .purpose-option {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .purpose-option input {
+      display: none;
+    }
+
+    .purpose-btn {
+      display: block;
+      padding: 12px 16px;
+      text-align: center;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .purpose-option input:checked + .purpose-btn {
+      border-color: #f26739;
+      background: #fff5f2;
+      color: #f26739;
+    }
+
+    .purpose-btn:hover {
+      border-color: #ccc;
+    }
+
+    .access-result {
+      margin-top: 20px;
+    }
+
+    .access-card {
+      border-left: 4px solid #f26739;
+    }
+
+    /* FAQ Accordion Styles */
+    .accordion-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 10px !important;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      font-weight: 600;
+      font-size: 16px;
+      padding: 20px 25px;
+      background: #fff;
+      color: #000;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: #fff;
+      color: #f26739;
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: #e0e0e0;
+    }
+
+    .accordion-button::after {
+      background-size: 16px;
+    }
+
+    .accordion-body {
+      padding: 0 25px 20px;
+      color: #666;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body class="light">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWB3H5MQ" height="0" width="0"
+      style="display: none; visibility: hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="zubuz-preloader-wrap">
+    <div class="zubuz-preloader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <header class="site-header site-header--menu-center zubuz-header-section dark-bg white-menu" id="sticky-menu"
+    style="background-color: black">
+    <div class="container">
+      <nav class="navbar site-navbar">
+        <div class="brand-logo">
+          <a href="index.html">
+            <img src="assets/images/logo/logo-white.png" alt="" class="light-version-logo" />
+          </a>
+        </div>
+        <div class="menu-block-wrapper">
+          <div class="menu-overlay"></div>
+          <nav class="menu-block" id="append-menu-header"></nav>
+        </div>
+
+        <div class="header-btn header-btn-l1 ms-auto d-xs-inline-flex">
+          <a class="zubuz-default-btn zubuz-header-btn" href="https://portal.cocredit.com.au/auth/signup">
+            <span>Get Started</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="zubuz-breadcrumb" style="padding-bottom: 40px;">
+    <div class="container">
+      <h1 class="post__title">
+        Calculate your trail book borrowing power
+      </h1>
+      <p style="font-size: 18px; color: #fff; max-width: 600px; margin: 20px auto 0;">
+        Use our calculator to instantly see how much you could access against your trail book. No credit check required.
+      </p>
+    </div>
+  </div>
+
+  <div class="section zubuz-section-padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="zubuz-form-wrap">
+            <h3>Enter your details</h3>
+            <p style="color: #666; margin-bottom: 25px;">Just enter your monthly trail income to see an estimate of your borrowing capacity.</p>
+            <form id="calculator-form">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="zubuz-main-form input-prefix">
+                    <input type="text" id="monthlyTrail" placeholder="Monthly Trail Income*"
+                      value="10,000" required inputmode="numeric" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="purpose-selector">
+                <div class="purpose-label">Loan Purpose</div>
+                <div class="purpose-options">
+                  <label class="purpose-option">
+                    <input type="radio" name="loanPurpose" value="working-capital" />
+                    <span class="purpose-btn">Working Capital</span>
+                  </label>
+                  <label class="purpose-option">
+                    <input type="radio" name="loanPurpose" value="acquisition" checked />
+                    <span class="purpose-btn">Acquisition</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-label">
+                  <span>Book Multiple</span>
+                  <span class="slider-value" id="multipleDisplay">3.0x</span>
+                </div>
+                <input type="range" id="bookMultiple" min="2" max="3.5" step="0.1" value="3" />
+              </div>
+
+              <p class="calculator-note">
+                * This calculator provides estimates only. Actual borrowing capacity depends on individual
+                circumstances.
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="calculator-results show" id="results">
+            <div class="result-card primary">
+              <div class="result-label">Estimated Book Value</div>
+              <div class="result-value" id="bookValue">$360,000</div>
+            </div>
+
+            <div class="result-card" style="background: #fff;">
+              <div class="breakdown-item">
+                <span class="label">Monthly Trail</span>
+                <span class="value" id="displayMonthlyTrail">$10,000</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="label">Annual Trail</span>
+                <span class="value" id="annualTrail">$120,000</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="label">Book Multiple</span>
+                <span class="value" id="displayMultiple">3.0x</span>
+              </div>
+            </div>
+
+            <h4 style="margin: 25px 0 15px; font-size: 18px;">You can access:</h4>
+
+            <div class="access-result">
+              <div class="result-card access-card" id="accessCard">
+                <div class="result-label" id="accessLabel">Acquisition Finance</div>
+                <div class="result-value highlight" id="accessAmount">$252,000</div>
+                <div style="font-size: 13px; color: #666; margin-top: 5px;" id="accessPercent">70% of book value</div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="comparisonChart"></canvas>
+            </div>
+
+            <div class="cta-section">
+              <p>Ready to unlock your trail book's potential?</p>
+              <a class="zubuz-default-btn" href="https://portal.cocredit.com.au/auth/signup">
+                <span>Get Started</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benefits Section -->
+  <div class="section zubuz-section-padding3 bg-light">
+    <div class="container">
+      <div class="zubuz-section-title center">
+        <h2>Why brokers choose Co.Credit</h2>
+        <p style="color: #666; max-width: 600px; margin: 0 auto;">We've built the fastest, most flexible trail book lending solution specifically for mortgage brokers.</p>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-md-6">
+          <div class="zubuz-iconbox-wrap center">
+            <div class="zubuz-iconbox-icon">
+              <img src="assets/images/v1/icon3.png" alt="" />
+            </div>
+            <div class="zubuz-iconbox-data">
+              <h3>Fast decisions</h3>
+              <p>Get a decision within 24 hours. No waiting weeks for credit committees or lengthy paperwork.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="zubuz-iconbox-wrap center">
+            <div class="zubuz-iconbox-icon">
+              <img src="assets/images/v1/icon5.png" alt="" />
+            </div>
+            <div class="zubuz-iconbox-data">
+              <h3>No property security</h3>
+              <p>Borrow against your trail book, not your home. Your trail income is your security.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="zubuz-iconbox-wrap center">
+            <div class="zubuz-iconbox-icon">
+              <img src="assets/images/v1/icon7.png" alt="" />
+            </div>
+            <div class="zubuz-iconbox-data">
+              <h3>Flexible terms</h3>
+              <p>No minimum loan term. Pay out your facility whenever you're ready with no early exit penalties.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Benefits Section -->
+
+  <!-- How It Works Section -->
+  <div class="section zubuz-section-padding2">
+    <div class="container">
+      <div class="zubuz-section-title center">
+        <h2>How it works</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="zubuz-iconbox-wrap center">
+            <div style="width: 50px; height: 50px; background: #f26739; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-weight: 700; font-size: 20px;">1</div>
+            <div class="zubuz-iconbox-data">
+              <h3>Apply online</h3>
+              <p>Complete our simple online application in under 10 minutes. No financials required upfront.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="zubuz-iconbox-wrap center">
+            <div style="width: 50px; height: 50px; background: #f26739; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-weight: 700; font-size: 20px;">2</div>
+            <div class="zubuz-iconbox-data">
+              <h3>Get approved</h3>
+              <p>We'll assess your trail book and provide an offer within 24 hours.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="zubuz-iconbox-wrap center">
+            <div style="width: 50px; height: 50px; background: #f26739; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-weight: 700; font-size: 20px;">3</div>
+            <div class="zubuz-iconbox-data">
+              <h3>Access funds</h3>
+              <p>Once approved, funds are deposited directly to your account. Use them however you need.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End How It Works -->
+
+  <!-- FAQ Section -->
+  <div class="section zubuz-section-padding3 bg-light">
+    <div class="container">
+      <div class="zubuz-section-title center">
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="zubuz-accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  How much can I borrow?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Your borrowing capacity depends on your monthly trail income and the purpose of the loan. For acquisitions, you can typically access up to 70% of your book value. For working capital, you can access up to 50%. Use the calculator above to get an estimate based on your trail income.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  What is the book multiple?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  The book multiple is used to estimate the value of your trail book. It typically ranges from 2x to 3.5x your annual trail income, depending on factors like the quality of your loan book, lender mix, and historical runoff rates. The default of 3x is a common industry benchmark.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  How quickly can I get approved?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Most applications receive a decision within 24 hours. Our automated systems analyse your trail book data to provide fast, accurate assessments without the need for lengthy manual reviews.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  Do I need to provide property as security?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  No. Unlike traditional business loans, Co.Credit loans are secured against your trail book income, not property. This means you don't need to put your home or investment properties at risk to access funding.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  What can I use the funds for?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  You can use your funds for acquiring another broker's trail book, business expansion, hiring staff, marketing, technology upgrades, or general working capital. The choice is yours.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End FAQ Section -->
+
+  <!-- CTA Section -->
+  <div class="zubuz-cta-section dark-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <h2 style="color: white; margin-bottom: 20px;">Ready to unlock your trail book's potential?</h2>
+          <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px; font-size: 18px;">
+            Join hundreds of brokers who've used Co.Credit to grow their business. Apply online in under 10 minutes.
+          </p>
+          <a class="zubuz-default-btn" href="https://portal.cocredit.com.au/auth/signup">
+            <span>Get Started Now</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End CTA Section -->
+
+  <!-- Contact Section -->
+  <div class="section dark-bg zubuz-section-padding6" style="background: #111;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <a href="mailto:hello@cocredit.com.au">
+            <div class="zubuz-iconbox-wrap-left text-center-lg rt-mb-24">
+              <div class="zubuz-iconbox-icon">
+                <img src="assets/images/icon/email3.svg" alt="" />
+              </div>
+              <div class="zubuz-iconbox-data light">
+                <h3>Email us</h3>
+                <p>hello@cocredit.com.au<br /></p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <a href="tel:1300112999">
+            <div class="zubuz-iconbox-wrap-left text-center-lg rt-mb-24">
+              <div class="zubuz-iconbox-icon">
+                <img src="assets/images/icon/call2.svg" alt="" />
+              </div>
+              <div class="zubuz-iconbox-data light">
+                <h3>Call us</h3>
+                <p>1300 112 999<br /></p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="zubuz-iconbox-wrap-left text-center-lg rt-mb-24">
+            <div class="zubuz-iconbox-icon">
+              <img src="assets/images/icon/map2.svg" alt="" />
+            </div>
+            <div class="zubuz-iconbox-data light">
+              <h3>Our office address</h3>
+              <p>
+                55 Collins St,<br />
+                Melbourne VIC.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="zubuz-footer-section main-footer dark-bg">
+    <div class="container">
+      <div class="zubuz-footer-top">
+        <div class="row">
+          <div class="col-xl-4 col-lg-12">
+            <div class="zubuz-footer-textarea light">
+              <a href="">
+                <img src="assets/images/logo/logo-white.png" alt="" />
+              </a>
+              <p>The secret weapon for every Australian Broker.</p>
+              <p>1300 112 999</p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-4">
+            <div class="zubuz-footer-menu extar-margin light">
+              <div class="zubuz-footer-title light">
+                <p>Resources</p>
+              </div>
+              <ul class="menu-list">
+                <li><a href="calculator.html">Borrowing Calculator</a></li>
+                <li><a href="privacy.html">Privacy policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="zubuz-footer-bottom">
+        <div class="zubuz-copywright light">
+          <p>
+            Approved applicants only. Conditions, fees and charges may apply.
+            Copyright &copy; 2026 | Co.Credit Finance pty. ltd. | ABN 72 676
+            367 196
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/menu/menu.js"></script>
+  <script src="assets/js/isotope.pkgd.min.js"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="assets/js/slick.js"></script>
+  <script src="assets/js/countdown.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/faq.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/calculator.js"></script>
+</body>
+
+</html>

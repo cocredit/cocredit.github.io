@@ -179,12 +179,35 @@
                 <div class="col-lg-12">
                   <div class="zubuz-main-form">
                     <input name="phone" type="mobile" placeholder="Contact Number*" />
+                    <span class="helper-text" style="
+                          color: #6c757d;
+                          font-size: 13px;
+                          margin-top: 5px;
+                          display: block;
+                        ">We'll send a verification code to this number</span>
                     <span class="error-message" id="phone-error" style="
                           color: #ff6b35;
                           font-size: 14px;
                           margin-top: 5px;
                           display: none;
                         "></span>
+                  </div>
+                </div>
+                <div class="col-lg-12" id="verification-section" style="display: none;">
+                  <div class="zubuz-main-form">
+                    <input name="verification_code" type="text" placeholder="Enter 6-digit SMS code*" maxlength="6" pattern="[0-9]{6}" />
+                    <span class="error-message" id="verification-error" style="
+                          color: #ff6b35;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        "></span>
+                    <span class="success-message" id="verification-sent" style="
+                          color: #28a745;
+                          font-size: 14px;
+                          margin-top: 5px;
+                          display: none;
+                        ">Verification code sent! Check your phone.</span>
                   </div>
                 </div>
               </div>
@@ -300,6 +323,10 @@
 
   <script>
     (function () {
+      var VERIFY_API_BASE = "https://verify.njord-playground.net";
+      var verificationPending = false;
+      var verifiedPhoneNumber = null;
+
       // --- Helper: read cookie by name ---
       function getCookie(name) {
         var match = document.cookie.match(
@@ -327,10 +354,24 @@
         }
         field.value = value;
       }
+
+      function formatPhoneForAPI(phone) {
+        var cleaned = phone.replace(/\s/g, "");
+        if (cleaned.startsWith("0")) {
+          return "+61" + cleaned.substring(1);
+        }
+        return cleaned;
+      }
+
       // --- Run once the DOM is ready ---
       document.addEventListener("DOMContentLoaded", function () {
         var form = document.getElementById("contact-form");
         if (!form) return; // no form found
+
+        var verificationSection = document.getElementById("verification-section");
+        var verificationError = document.getElementById("verification-error");
+        var verificationSent = document.getElementById("verification-sent");
+        var submitBtn = document.getElementById("zubuz-submit-btn");
 
         // Add hidden fields - Can update as need be
         setHiddenField(form, "fbp", fbp);
@@ -358,6 +399,7 @@
           var phoneError = document.getElementById("phone-error");
           emailError.style.display = "none";
           phoneError.style.display = "none";
+          verificationError.style.display = "none";
 
           var hasErrors = false;
 
@@ -376,8 +418,9 @@
 
           // Phone validation for Australian mobile format
           var phoneInput = form.querySelector("input[name='phone']");
+          var phoneValue = "";
           if (phoneInput && phoneInput.value) {
-            var phoneValue = phoneInput.value.trim();
+            phoneValue = phoneInput.value.trim();
             // Matches +61 followed by 9 digits or 0 followed by 9 digits (Australian mobile)
             var australianMobileRegex = /^(\+61|0)[0-9]{9}$/;
             if (!australianMobileRegex.test(phoneValue.replace(/\s/g, ""))) {
@@ -392,30 +435,115 @@
             return false;
           }
 
-          // Submit form data
-          var formData = new FormData(form);
+          var formattedPhone = formatPhoneForAPI(phoneValue);
 
-          fetch("https://formspree.io/f/mqkrwwrb", {
+          // Step 1: If verification not pending, send verification code
+          if (!verificationPending) {
+            submitBtn.disabled = true;
+            submitBtn.querySelector("span").textContent = "Sending code...";
+
+            fetch(VERIFY_API_BASE + "/start", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ phoneNumber: formattedPhone }),
+            })
+              .then(function (response) {
+                return response.json().then(function (data) {
+                  return { ok: response.ok, data: data };
+                });
+              })
+              .then(function (result) {
+                submitBtn.disabled = false;
+                submitBtn.querySelector("span").textContent = "Send Message";
+
+                if (result.ok) {
+                  verificationPending = true;
+                  verifiedPhoneNumber = formattedPhone;
+                  verificationSection.style.display = "block";
+                  verificationSent.style.display = "block";
+                  form.querySelector("input[name='verification_code']").focus();
+                } else {
+                  phoneError.textContent = result.data.error || "Failed to send verification code. Please try again.";
+                  phoneError.style.display = "block";
+                }
+              })
+              .catch(function () {
+                submitBtn.disabled = false;
+                submitBtn.querySelector("span").textContent = "Send Message";
+                phoneError.textContent = "Failed to send verification code. Please try again.";
+                phoneError.style.display = "block";
+              });
+
+            return false;
+          }
+
+          // Step 2: Verify the code
+          var codeInput = form.querySelector("input[name='verification_code']");
+          var code = codeInput ? codeInput.value.trim() : "";
+
+          if (!code || code.length !== 6) {
+            verificationError.textContent = "Please enter the 6-digit code sent to your phone.";
+            verificationError.style.display = "block";
+            return false;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.querySelector("span").textContent = "Verifying...";
+
+          fetch(VERIFY_API_BASE + "/check", {
             method: "POST",
-            body: formData,
             headers: {
-              Accept: "application/json",
+              "Content-Type": "application/json",
             },
+            body: JSON.stringify({ phoneNumber: verifiedPhoneNumber, code: code }),
           })
             .then(function (response) {
-              if (response.ok) {
-                // Redirect to thank you page
-                window.location.href = "/thanks.html";
+              return response.json().then(function (data) {
+                return { ok: response.ok, data: data };
+              });
+            })
+            .then(function (result) {
+              if (result.ok && result.data.valid) {
+                // Verification successful, submit to Formspree
+                submitBtn.querySelector("span").textContent = "Sending...";
+                var formData = new FormData(form);
+
+                fetch("https://formspree.io/f/mqkrwwrb", {
+                  method: "POST",
+                  body: formData,
+                  headers: {
+                    Accept: "application/json",
+                  },
+                })
+                  .then(function (response) {
+                    if (response.ok) {
+                      // Redirect to thank you page
+                      window.location.href = "/thanks.html";
+                    } else {
+                      submitBtn.disabled = false;
+                      submitBtn.querySelector("span").textContent = "Send Message";
+                      alert("There was an error submitting the form. Please try again.");
+                    }
+                  })
+                  .catch(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.querySelector("span").textContent = "Send Message";
+                    alert("There was an error submitting the form. Please try again.");
+                  });
               } else {
-                alert(
-                  "There was an error submitting the form. Please try again."
-                );
+                submitBtn.disabled = false;
+                submitBtn.querySelector("span").textContent = "Send Message";
+                verificationError.textContent = result.data.error || "Invalid verification code. Please try again.";
+                verificationError.style.display = "block";
               }
             })
-            .catch(function (error) {
-              alert(
-                "There was an error submitting the form. Please try again."
-              );
+            .catch(function () {
+              submitBtn.disabled = false;
+              submitBtn.querySelector("span").textContent = "Send Message";
+              verificationError.textContent = "Failed to verify code. Please try again.";
+              verificationError.style.display = "block";
             });
 
           return false;
