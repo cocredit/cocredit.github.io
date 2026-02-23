@@ -533,6 +533,15 @@
                 })
                   .then(function (response) {
                     if (response.ok) {
+                      // Identify user in PostHog
+                      var email = form.querySelector("input[name='email']").value.trim();
+                      posthog.identify(email, {
+                        first_name: form.querySelector("input[name='first_name']").value.trim(),
+                        last_name: form.querySelector("input[name='last_name']").value.trim(),
+                        email: email,
+                        phone: verifiedPhoneNumber,
+                        form_source: 'acquisition_download'
+                      });
                       window.location.href = "packs/acquisition.html";
                     } else {
                       submitBtn.disabled = false;

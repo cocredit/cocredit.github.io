@@ -528,6 +528,15 @@
                 })
                   .then(function (response) {
                     if (response.ok) {
+                      // Identify user in PostHog
+                      var email = form.querySelector("input[name='email']").value.trim();
+                      posthog.identify(email, {
+                        first_name: form.querySelector("input[name='first_name']").value.trim(),
+                        last_name: form.querySelector("input[name='last_name']").value.trim(),
+                        email: email,
+                        phone: verifiedPhoneNumber,
+                        form_source: 'contact'
+                      });
                       // Redirect to thank you page
                       window.location.href = "/thanks.html";
                     } else {

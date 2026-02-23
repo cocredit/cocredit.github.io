@@ -1083,6 +1083,16 @@
           })
             .then(function (response) {
               if (response.ok) {
+                // Identify user in PostHog
+                var email = form.querySelector("input[name='email']").value.trim();
+                posthog.identify(email, {
+                  name: form.querySelector("input[name='name']").value.trim(),
+                  email: email,
+                  phone: form.querySelector("input[name='phone']").value.trim(),
+                  aggregator: form.querySelector("select[name='aggregator']").value,
+                  monthly_trail: form.querySelector("input[name='monthly_trail']").value.trim(),
+                  form_source: 'sell_valuation'
+                });
                 // Fire Facebook Lead event
                 if (typeof fbq !== "undefined") {
                   fbq("track", "Lead");
